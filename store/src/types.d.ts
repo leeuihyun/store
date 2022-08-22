@@ -7,7 +7,8 @@ interface AllState {
     logOutError: null | string;
     wishLoading: boolean;
     wishDone: boolean;
-    wishError: null;
+    wishError: null | object;
+    wishData: Array<>;
     cancelLoading: boolean;
     cancelDone: boolean;
     cancelError: null | string;
