@@ -13,3 +13,5 @@ interface AllState {
     cancelDone: boolean;
     cancelError: null | string;
 }
+
+type onClickSearch = (e: React.MouseEvent<HTMLButtonElement>) => void;
