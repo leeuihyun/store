@@ -94,5 +94,15 @@ export const NewPageButton = styled.button`
     color: white;
     background-color: black;
 `;
+
+export const SearchButton = styled.button`
+    margin-top: 5px;
+    border-radius: 5px;
+    width: 80px;
+    height: 40px;
+    border: none;
+    color: white;
+    background-color: black;
+`;
 export const StyledBottom = styled.div``;
 export const StyledFooter = styled.div``;
