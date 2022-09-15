@@ -7,14 +7,14 @@ import SearchButtonDiv from "../subComponents/SearchButtonDiv";
 import axios from "axios";
 
 function MainComponents() {
-    const [arr, setArr] = useState();
+    const [arr, setArr] = useState<Perfume[] | null>(null);
     const onClickButton = async (e: React.MouseEvent<HTMLButtonElement>) => {
         console.log("click button2");
         const url = `/v1/search/shop.json`;
         await axios
             .get(url, {
                 params: {
-                    query: "모자",
+                    query: "향수",
                     display: 10,
                 },
                 headers: {
@@ -23,7 +23,10 @@ function MainComponents() {
                     "Content-Type": "plain/text",
                 },
             })
-            .then((res) => console.log(res))
+            .then((res) => {
+                setArr(res.data.items);
+                console.log(res.data.items);
+            })
             .catch((error) => console.error(error));
     };
     return (
@@ -34,6 +37,20 @@ function MainComponents() {
             <SearchButtonDiv onClick={onClickButton}>
                 데이터 가져오기
             </SearchButtonDiv>
+            <div>
+                {arr &&
+                    arr.map((v) => {
+                        const num: number = v.title.indexOf("<");
+                        console.log(num);
+                        return (
+                            <div key={v.productId}>
+                                {num !== -1
+                                    ? v.title.substring(1, num)
+                                    : v.title}
+                            </div>
+                        );
+                    })}
+            </div>
         </StyledMainComponentDiv>
     );
 }
