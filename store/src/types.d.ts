@@ -14,4 +14,16 @@ interface AllState {
     cancelError: null | string;
 }
 
+interface Perfume {
+    title: string;
+    brand: string;
+    image: string;
+    productId: string;
+    productType: string;
+    category1?: string;
+    category2?: string;
+    category3?: string;
+    category4?: string;
+}
+
 type onClickSearch = (e: React.MouseEvent<HTMLButtonElement>) => void;
