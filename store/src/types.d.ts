@@ -1,3 +1,8 @@
+declare module "*.jpg";
+declare module "*.png";
+declare module "*.jpeg";
+declare module "*.gif";
+
 interface AllState {
     logInLoading: boolean;
     logInDone: boolean;
