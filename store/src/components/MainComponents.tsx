@@ -6,6 +6,7 @@ import { StyledMainComponentDiv } from "../styled/StyledCollection";
 import SearchButtonDiv from "../subComponents/SearchButtonDiv";
 import FirstImageDiv from "../subComponents/FirstImageDiv";
 import SecondImageDiv from "../subComponents/SecondImageDiv";
+import Footer from "../subComponents/Footer";
 
 import axios from "axios";
 
@@ -56,6 +57,7 @@ function MainComponents() {
                         return <div key={v.productId}>{v.title}</div>;
                     })}
             </div>
+            <Footer></Footer>
         </StyledMainComponentDiv>
     );
 }

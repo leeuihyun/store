@@ -1,5 +1,8 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
+export const slow = keyframes`
+    
+`;
 export const StyleKakaoButton = styled.button`
     background-color: yellow;
     color: black;
@@ -17,22 +20,32 @@ export const StyledMainComponentDiv = styled.div`
     flex-direction: column;
 `;
 
-export const StyledTop = styled.div`
+export const StyledTop = styled.div<{ back?: boolean }>`
     width: 100%;
     height: 30px;
-    background-color: gray;
-    color: black;
+    z-index: 1000;
+    transition-property: "background-color";
+    transition-duration: 2s;
+    background-color: ${(props) => (props.back ? "black" : "white")};
+    color: ${(props) => (props.back ? "white" : "black")};
     display: flex;
+    position: fixed;
     justify-content: center;
     align-items: center;
     font-family: "surroundAir";
+    top: 0;
 `;
 
-export const StyledHeader = styled.div<{ toggle: boolean }>`
+export const StyledHeader = styled.div<{ toggle: boolean; back?: boolean }>`
     width: 100%;
     height: 60px;
-    background-color: black;
-    color: white;
+    position: fixed;
+    top: 30px;
+    transition-property: "background-color";
+    transition-duration: 2s;
+    background-color: ${(props) => (props.back ? "black" : "white")};
+    color: ${(props) => (props.back ? "white" : "black")};
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,13 +59,15 @@ export const StyledHeader = styled.div<{ toggle: boolean }>`
 
 export const StyledHeaderTitle = styled.div`
     cursor: pointer;
-
+    font-size: 30px;
+    font-weight: bold;
     width: 33%;
     display: flex;
     justify-content: center;
     align-items: center;
     @media screen and (max-width: 767px) {
         padding-top: 12px;
+        font-size: 20px;
     }
 `;
 
@@ -64,6 +79,7 @@ export const StyledHeaderList = styled.div<{ toggle: boolean }>`
     justify-content: center;
     align-items: center;
     li {
+        cursor: pointer;
         padding: 8px 8px;
     }
     @media screen and (max-width: 767px) {
@@ -121,22 +137,47 @@ export const SearchButton = styled.button`
     background-color: black;
 `;
 
-export const ImageDivStyle = styled.div<{ imgSrc: string }>`
+export const ImageDivStyle = styled.div<{ imgSrc: string; first: boolean }>`
     width: 100%;
-    height: 630px;
+    height: 720px;
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background-image: url("${(props) => props.imgSrc}");
     background-repeat: no-repeat;
     background-size: cover;
-    font-size: 30px;
     font-weight: bold;
     color: white;
+    top: ${(props) => props.first && "90px"};
+    .title {
+        font-size: 32px;
+    }
+    .content {
+        font-size: 20px;
+    }
     @media screen and (max-width: 767px) {
-        height: 350px;
+        top: ${(props) => props.first && "75px"};
+        height: 400px;
+        .title {
+            font-size: 18px;
+        }
+        .content {
+            font-size: 12px;
+        }
     }
 `;
 
 export const StyledBottom = styled.div``;
-export const StyledFooter = styled.div``;
+export const StyledFooter = styled.div`
+    width: 100%;
+    height: 300px;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-direction: column;
+`;
