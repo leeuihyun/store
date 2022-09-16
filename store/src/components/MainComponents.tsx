@@ -15,7 +15,7 @@ function MainComponents() {
             .get(url, {
                 params: {
                     query: "향수",
-                    display: 10,
+                    display: 100,
                 },
                 headers: {
                     "X-Naver-Client-Id": `eXLSdjS_rWMbvWtV5IAN`,
@@ -40,15 +40,17 @@ function MainComponents() {
             <div>
                 {arr &&
                     arr.map((v) => {
-                        const num: number = v.title.indexOf("<");
-                        console.log(num);
-                        return (
-                            <div key={v.productId}>
-                                {num !== -1
-                                    ? v.title.substring(1, num)
-                                    : v.title}
-                            </div>
-                        );
+                        //const num: number = v.title.indexOf("<");
+                        //console.log(num);
+
+                        if (v.title.includes("<b>향수</b>")) {
+                            v.title = v.title.replace("<b>향수</b>", " ");
+                        }
+                        if (v.title.includes("<b>퍼퓸</b>")) {
+                            v.title = v.title.replace("<b>퍼퓸</b>", " ");
+                        }
+
+                        return <div key={v.productId}>{v.title}</div>;
                     })}
             </div>
         </StyledMainComponentDiv>
