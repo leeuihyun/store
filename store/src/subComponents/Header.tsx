@@ -16,16 +16,15 @@ function Header() {
     };
     return (
         <StyledHeader toggle={list}>
-            <StyledHeaderTitle>무신사</StyledHeaderTitle>
             <StyledHeaderList toggle={list}>
-                <li>쥬얼리</li>
-                <li>남성 옷</li>
-                <li>여성 옷</li>
-                <li>전자 제품</li>
+                <li>여성향수</li>
+                <li>남성향수</li>
+                <li>공용향수</li>
             </StyledHeaderList>
-            <StyledHeaderLogo>로고</StyledHeaderLogo>
+            <StyledHeaderTitle>PAFFEM</StyledHeaderTitle>
+            <StyledHeaderLogo>🗝 PF</StyledHeaderLogo>
             <StyledHeaderMenuButton onClick={onClickMenu}>
-                메뉴
+                ⏚
             </StyledHeaderMenuButton>
         </StyledHeader>
     );

@@ -4,12 +4,14 @@ import Header from "../subComponents/Header";
 import NewPageButtonDiv from "../subComponents/NewPageButtonDiv";
 import { StyledMainComponentDiv } from "../styled/StyledCollection";
 import SearchButtonDiv from "../subComponents/SearchButtonDiv";
+import FirstImageDiv from "../subComponents/FirstImageDiv";
+import SecondImageDiv from "../subComponents/SecondImageDiv";
+
 import axios from "axios";
 
 function MainComponents() {
     const [arr, setArr] = useState<Perfume[] | null>(null);
     const onClickButton = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        console.log("click button2");
         const url = `/v1/search/shop.json`;
         await axios
             .get(url, {
@@ -33,6 +35,8 @@ function MainComponents() {
         <StyledMainComponentDiv>
             <Top />
             <Header />
+            <FirstImageDiv />
+            <SecondImageDiv />
             <NewPageButtonDiv>뉴페이지</NewPageButtonDiv>
             <SearchButtonDiv onClick={onClickButton}>
                 데이터 가져오기
@@ -42,7 +46,6 @@ function MainComponents() {
                     arr.map((v) => {
                         //const num: number = v.title.indexOf("<");
                         //console.log(num);
-
                         if (v.title.includes("<b>향수</b>")) {
                             v.title = v.title.replace("<b>향수</b>", " ");
                         }
