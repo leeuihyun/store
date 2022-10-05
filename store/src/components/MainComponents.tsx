@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Top from "../subComponents/Top";
 import Header from "../subComponents/Header";
 import NewPageButtonDiv from "../subComponents/NewPageButtonDiv";
@@ -7,11 +7,19 @@ import SearchButtonDiv from "../subComponents/SearchButtonDiv";
 import FirstImageDiv from "../subComponents/FirstImageDiv";
 import SecondImageDiv from "../subComponents/SecondImageDiv";
 import Footer from "../subComponents/Footer";
-
+import { RootState } from "../store/store";
 import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { getData } from "../reducers/userSlice";
+import { useSelector } from "react-redux";
 
 function MainComponents() {
     const [arr, setArr] = useState<Perfume[] | null>(null);
+    const dispatch = useAppDispatch();
+    const { data } = useSelector((state: RootState) => state.user);
+    const onClickTestButton = useCallback(() => {
+        dispatch(getData());
+    }, []);
     const onClickButton = async (e: React.MouseEvent<HTMLButtonElement>) => {
         const url = `/v1/search/shop.json`;
         await axios
@@ -42,6 +50,13 @@ function MainComponents() {
             <SearchButtonDiv onClick={onClickButton}>
                 데이터 가져오기
             </SearchButtonDiv>
+            <button onClick={onClickTestButton}>비동기 Test 버튼</button>
+            <div>
+                {data &&
+                    data.map((v: any) => {
+                        return <div key={v.productId}>{v.title}</div>;
+                    })}
+            </div>
             <div>
                 {arr &&
                     arr.map((v) => {

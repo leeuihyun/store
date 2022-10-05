@@ -17,6 +17,10 @@ interface AllState {
     cancelLoading: boolean;
     cancelDone: boolean;
     cancelError: null | string;
+    getDataLoading: boolean;
+    getDataDone: boolean;
+    getDataError: null | objects;
+    data: null | Array<>;
 }
 
 interface Perfume {

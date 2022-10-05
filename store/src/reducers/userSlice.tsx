@@ -16,6 +16,10 @@ const initialState: AllState = {
     cancelLoading: false,
     cancelDone: false,
     cancelError: null,
+    getDataLoading: false,
+    getDataDone: false,
+    getDataError: null,
+    data: null,
 };
 export const logIn = createAsyncThunk(
     "logIn",
@@ -27,7 +31,25 @@ export const logIn = createAsyncThunk(
         }
     }
 );
-
+export const getData = createAsyncThunk("getData", async () => {
+    try {
+        const url = `/v1/search/shop.json`;
+        const res = await axios.get(url, {
+            params: {
+                query: "향수",
+                display: 100,
+            },
+            headers: {
+                "X-Naver-Client-Id": `eXLSdjS_rWMbvWtV5IAN`,
+                "X-Naver-Client-Secret": `XlMpKxqWdC`,
+                "Content-Type": "plain/text",
+            },
+        });
+        return res.data.items;
+    } catch (error) {
+        console.error(error);
+    }
+});
 export const wish = createAsyncThunk("wish", async (data: number) => {
     try {
         const res = await axios.get(
@@ -39,6 +61,7 @@ export const wish = createAsyncThunk("wish", async (data: number) => {
         console.error(error);
     }
 });
+
 const userSlice = createSlice({
     name: "user",
     initialState,
@@ -74,6 +97,23 @@ const userSlice = createSlice({
             state.wishLoading = false;
             state.wishDone = false;
             state.wishError = action.payload;
+        },
+        [getData.pending.type]: (state, action: PayloadAction<object>) => {
+            state.getDataLoading = true;
+            state.getDataDone = false;
+            state.getDataError = null;
+            state.data = null;
+        },
+        [getData.fulfilled.type]: (state, action: PayloadAction<object>) => {
+            state.getDataLoading = false;
+            state.getDataDone = true;
+            state.getDataError = null;
+            state.data = action.payload;
+        },
+        [getData.rejected.type]: (state, action: PayloadAction<object>) => {
+            state.getDataLoading = false;
+            state.getDataDone = false;
+            state.getDataError = action.payload;
         },
     },
 });
